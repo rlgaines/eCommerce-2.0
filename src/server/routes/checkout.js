@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var stripe = require('stripe')(process.env.SRIPE_SECRET_KEY);
 
 
 router.get('/', function(req, res, next){
@@ -8,7 +9,7 @@ router.get('/', function(req, res, next){
 
 router.post('/', function(req, res,next) {
     var stripeToken = req.body.stripeToken;
-    var amount =  req.body.stripeAmount;
+    var amount =  1000;
     console.log(req.body);
     stripe.charges.create({
         card: stripeToken,
@@ -22,7 +23,6 @@ router.post('/', function(req, res,next) {
             res.send('success');
         }
     });
-    res.json(req.body)
 });
 
 module.exports = router;
