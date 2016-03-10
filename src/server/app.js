@@ -1,3 +1,4 @@
+require('dotenv').config();
 // *** main dependencies *** //
 var express = require('express');
 var path = require('path');
@@ -7,12 +8,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var swig = require('swig');
 
-
 // *** routes *** //
 var routes = require('./routes/index.js');
 var productRoute = require('./routes/products.js')
 var checkoutRoute = require('./routes/checkout.js')
-
+var chargeRoute = require('./routes/charge.js')
 // *** express instance *** //
 var app = express();
 
@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use('/', routes);
 app.use('/products', productRoute)
 app.use('/checkout', checkoutRoute)
-
+app.use('/charge', chargeRoute)
 
 
 // catch 404 and forward to error handler
